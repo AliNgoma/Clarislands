@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claris African Experience — For Sale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@200;300;400;500&family=Cormorant:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Accent derived from #375722 (forest green) */
+  --a:#7D2027;        /* primary accent */
+  --a2:#A02B34;       /* lighter accent */
+  --a3:#5A1519;       /* darker accent */
+  --al:#E8C0C2;       /* very light tint */
+  --axl:#FAF0F0;      /* near-white tint */
+  /* Neutrals */
+  --white:#FFFFFF;
+  --off:#F8F8F6;
+  --border:#E4E4E0;
+  --border2:#D0D0CA;
+  --ink:#111110;
+  --ink2:#2A2A27;
+  --muted:#555550;
+  --faint:#8A8A84;
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'Raleway',sans-serif;
+  --display:'Cormorant',Georgia,serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);font-weight:300;background:var(--white);color:var(--ink);line-height:1.7;overflow-x:hidden}
+
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--a);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+#cur2{position:fixed;width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(125,32,39,0.35);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .25s var(--ease),width .25s,height .25s}
+body:has(a:hover) #cur2,body:has(button:hover) #cur2{width:54px;height:54px;border-color:rgba(125,32,39,0.55)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 56px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.98);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+#nav.scrolled{border-bottom-color:var(--border);box-shadow:0 1px 24px rgba(0,0,0,0.05)}
+.nav-logo{font-family:var(--serif);font-size:1rem;font-weight:400;color:var(--ink);letter-spacing:.04em;text-decoration:none}
+.nav-logo span{font-style:italic;font-weight:300;color:var(--a)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;font-weight:400}
+.nav-links a:hover{color:var(--a)}
+.nav-cta{font-size:9px;letter-spacing:.2em;text-transform:uppercase;background:var(--a);border:none;color:#fff;padding:11px 26px;cursor:none;font-family:var(--body);font-weight:400;transition:background .2s}
+.nav-cta:hover{background:var(--a3)}
+
+/* HERO */
+#hero{min-height:100vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--white)}
+.hero-bg-pattern{position:absolute;inset:0;opacity:.025;background-image:repeating-linear-gradient(0deg,var(--a) 0px,var(--a) 1px,transparent 1px,transparent 48px),repeating-linear-gradient(90deg,var(--a) 0px,var(--a) 1px,transparent 1px,transparent 48px)}
+.hero-accent-bl{position:absolute;bottom:0;left:0;width:320px;height:320px;background:var(--axl);clip-path:polygon(0 100%,0 40%,60% 100%)}
+.hero-accent-tr{position:absolute;top:0;right:0;width:240px;height:240px;background:var(--axl);clip-path:polygon(100% 0,40% 0,100% 60%)}
+.hero-inner{position:relative;padding:140px 48px 80px;max-width:900px}
+.hero-badge{display:inline-flex;align-items:center;gap:12px;margin-bottom:36px;opacity:0;animation:fadeUp .8s var(--ease) .2s forwards}
+.hero-badge span{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--a)}
+.badge-line{width:28px;height:1px;background:var(--a);opacity:.5}
+.hero-h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,5.8rem);font-weight:300;line-height:1.06;color:var(--ink);margin-bottom:12px;opacity:0;animation:fadeUp .9s var(--ease) .4s forwards}
+.hero-h1 em{font-style:italic;color:var(--a);display:block}
+.hero-rule{width:64px;height:2px;background:var(--a);margin:28px auto;opacity:0;animation:fadeUp .6s var(--ease) .6s forwards}
+.hero-sub{font-size:15px;font-weight:300;color:var(--muted);max-width:520px;margin:0 auto 48px;letter-spacing:.02em;line-height:1.9;opacity:0;animation:fadeUp .8s var(--ease) .7s forwards}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s var(--ease) .85s forwards}
+.btn-primary{background:var(--a);color:#fff;font-family:var(--body);font-size:9px;letter-spacing:.28em;text-transform:uppercase;border:none;padding:15px 44px;cursor:none;font-weight:500;transition:background .2s}
+.btn-primary:hover{background:var(--a3)}
+.btn-secondary{background:transparent;color:var(--a);font-family:var(--body);font-size:9px;letter-spacing:.28em;text-transform:uppercase;border:1.5px solid var(--a);padding:15px 44px;cursor:none;font-weight:400;transition:background .2s,color .2s}
+.btn-secondary:hover{background:var(--a);color:#fff}
+.hero-stats{display:flex;gap:0;flex-wrap:wrap;justify-content:center;margin-top:80px;opacity:0;animation:fadeUp .8s var(--ease) 1s forwards;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:36px 0;width:100%;max-width:720px}
+.hstat{padding:0 44px;text-align:center;border-right:1px solid var(--border)}
+.hstat:last-child{border-right:none}
+.hstat .n{font-family:var(--serif);font-size:2.4rem;font-weight:300;color:var(--a);line-height:1;display:block}
+.hstat .l{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--faint);margin-top:8px;display:block}
+.scroll-ind{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .6s var(--ease) 1.2s forwards}
+.scroll-ind span{font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--a),transparent);animation:scrollPulse 2s ease-in-out infinite}
+
+/* LAYOUT */
+.wrap{max-width:1160px;margin:0 auto;padding:0 56px}
+.sec{padding:112px 0}
+.sec-off{background:var(--off)}
+.sec-green{background:var(--axl)}
+.stag{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:20px}
+.sec-title{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;line-height:1.12;margin-bottom:28px;color:var(--ink)}
+.sec-title em{font-style:italic;color:var(--a)}
+.sec-lead{font-size:15px;font-weight:300;line-height:1.9;max-width:580px;color:var(--muted)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}.delay-5{transition-delay:.5s}
+
+/* PILLARS */
+.pillars-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;margin-top:60px;background:var(--border)}
+.pillar{background:var(--white);padding:44px 36px;border-bottom:3px solid transparent;transition:border-color .3s,background .3s}
+.pillar:hover{border-bottom-color:var(--a);background:var(--axl)}
+.pillar-num{font-family:var(--display);font-size:3rem;font-weight:300;font-style:italic;color:rgba(125,32,39,0.4);line-height:1;display:block;margin-bottom:16px}
+.pillar-bar{width:28px;height:2px;background:var(--a);margin-bottom:20px;display:block}
+.pillar h3{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--ink);margin-bottom:12px}
+.pillar p{font-size:13px;color:var(--muted);line-height:1.8}
+
+/* TIMELINE */
+.timeline{margin-top:64px;position:relative}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--al),var(--al),transparent)}
+.tl-item{display:grid;grid-template-columns:72px 1fr;gap:40px;padding:36px 0 36px 40px;border-bottom:1px solid var(--border)}
+.tl-item:last-child{border-bottom:none}
+.tl-num{font-family:var(--display);font-size:2.8rem;font-weight:300;font-style:italic;color:rgba(125,32,39,0.4);line-height:1;text-align:right;padding-top:4px}
+.tl-content h3{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:var(--ink);margin-bottom:10px}
+.tl-content p{font-size:13px;color:var(--muted);line-height:1.8;max-width:560px}
+.tl-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tl-tag{font-size:8px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--al);color:var(--a);padding:4px 12px;background:var(--axl)}
+
+/* QUOTE */
+.quote-sec{padding:112px 0;text-align:center;background:var(--a);position:relative;overflow:hidden}
+.quote-bg{position:absolute;font-family:var(--display);font-size:40vw;color:rgba(255,255,255,0.04);top:50%;left:50%;transform:translate(-50%,-50%);font-style:italic;white-space:nowrap;pointer-events:none;line-height:1}
+.quote-inner{position:relative;max-width:800px;margin:0 auto;padding:0 48px}
+.q-rule{display:flex;align-items:center;gap:20px;justify-content:center;margin-bottom:36px}
+.q-rule span{width:48px;height:1px;background:rgba(255,255,255,.3)}
+.q-diamond{width:6px;height:6px;background:rgba(255,255,255,.6);transform:rotate(45deg)}
+.quote-sec blockquote{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.3rem);font-weight:300;font-style:italic;color:#fff;line-height:1.45;margin-bottom:36px}
+.quote-sec cite{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);font-style:normal}
+
+/* WATAMU */
+.watamu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:60px}
+.witem{background:var(--white);padding:44px 40px;border-left:3px solid transparent;transition:border-color .3s,background .3s}
+.witem:hover{border-left-color:var(--a);background:var(--axl)}
+.witem-num{font-family:var(--display);font-size:2rem;font-style:italic;font-weight:300;color:rgba(125,32,39,0.4);display:block;line-height:1;margin-bottom:14px}
+.witem h3{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--ink);margin-bottom:10px}
+.witem p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.8}
+
+/* LISTINGS */
+.prop-filter{display:flex;gap:0;margin-bottom:44px;border:1px solid var(--border);width:fit-content}
+.pf-btn{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);background:none;border:none;padding:13px 26px;cursor:none;font-family:var(--body);transition:color .2s,background .2s;border-right:1px solid var(--border)}
+.pf-btn:last-child{border-right:none}
+.pf-btn.active,.pf-btn:hover{background:var(--a);color:#fff}
+.props-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--border)}
+.prop-card{background:var(--white);cursor:none;position:relative;overflow:hidden;transition:background .25s}
+.prop-card:hover{background:var(--off)}
+.prop-card:hover .prop-img-inner{transform:scale(1.04)}
+.prop-card:hover .prop-overlay{opacity:1}
+.prop-img{height:260px;overflow:hidden;position:relative}
+.prop-img-inner{width:100%;height:100%;transition:transform .6s var(--ease);display:flex;align-items:center;justify-content:center}
+.prop-overlay{position:absolute;inset:0;background:rgba(125,32,39,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+.prop-overlay-btn{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.5);padding:11px 26px;font-family:var(--body)}
+.prop-badge-wrap{position:absolute;top:18px;left:18px;display:flex;gap:8px;z-index:2}
+.prop-badge{font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:5px 12px}
+.pb-type{background:var(--a);color:#fff}
+.pb-status{background:rgba(255,255,255,.92);color:var(--a);border:1px solid var(--al)}
+.prop-body{padding:32px}
+.prop-loc{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--a);margin-bottom:8px}
+.prop-body h3{font-family:var(--serif);font-size:1.45rem;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.2}
+.prop-body p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:24px}
+.prop-specs{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:22px}
+.pspec{padding:14px 18px 14px 0;border-right:1px solid var(--border);margin-right:18px}
+.pspec:last-child{border-right:none;margin-right:0}
+.pspec .sv{font-family:var(--serif);font-size:1.05rem;color:var(--a);display:block;line-height:1}
+.pspec .sk{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);display:block;margin-top:4px}
+.prop-actions{display:flex;gap:10px}
+.prop-cta-main{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--a);border:none;padding:11px 26px;cursor:none;font-family:var(--body);transition:background .2s}
+.prop-cta-main:hover{background:var(--a3)}
+.prop-cta-sec{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--a);background:none;border:1.5px solid var(--al);padding:11px 22px;cursor:none;font-family:var(--body);transition:border-color .2s,background .2s,color .2s}
+.prop-cta-sec:hover{border-color:var(--a);background:var(--axl)}
+
+/* MODAL */
+#modal-overlay{position:fixed;inset:0;background:rgba(17,17,16,0.7);z-index:800;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(6px)}
+#modal-overlay.open{opacity:1;pointer-events:all}
+#modal{position:fixed;inset:32px;background:#fff;z-index:801;overflow-y:auto;transform:translateY(16px);transition:transform .5s var(--ease);border:1px solid var(--border);box-shadow:0 24px 80px rgba(0,0,0,.15)}
+#modal-overlay.open #modal{transform:none}
+.modal-close{position:absolute;top:20px;right:20px;background:var(--a);border:none;color:#fff;font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:10px 20px;cursor:none;font-family:var(--body);z-index:2}
+.modal-close:hover{background:var(--a3)}
+.modal-inner{max-width:1040px;margin:0 auto;padding:64px 48px}
+.modal-hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:56px;align-items:start}
+.modal-gallery{display:grid;grid-template-rows:280px 140px;grid-template-columns:1fr 1fr;gap:3px}
+.mgal-main{grid-column:1/-1}
+.mgal-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.modal-info .stag{margin-bottom:14px}
+.modal-info h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:14px}
+.modal-info .mloc{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--a);margin-bottom:22px;display:block}
+.modal-info .mdesc{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:28px}
+.modal-specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:28px}
+.mspec{background:var(--off);padding:18px 22px}
+.mspec .msk{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:5px}
+.mspec .msv{font-family:var(--serif);font-size:1rem;color:var(--a);font-weight:300}
+.modal-ctas{display:flex;gap:10px;flex-wrap:wrap}
+.modal-sections{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:44px}
+.msec{border-top:2px solid var(--a);padding-top:22px}
+.msec h4{font-family:var(--serif);font-size:.95rem;font-weight:400;color:var(--ink);margin-bottom:12px}
+.msec ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.msec ul li{font-size:13px;color:var(--muted);padding-left:16px;position:relative;font-weight:300}
+.msec ul li::before{content:'—';position:absolute;left:0;color:var(--al);font-size:10px}
+.modal-contact{background:var(--axl);padding:40px;border:1px solid var(--al);text-align:center}
+.modal-contact h4{font-family:var(--serif);font-size:1.25rem;font-weight:300;color:var(--ink);margin-bottom:8px}
+.modal-contact p{font-size:13px;color:var(--muted);margin-bottom:22px}
+.modal-contact .cbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* WHY CLARIS */
+.claris-wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:64px;align-items:start}
+.claris-left .big-q{font-family:var(--serif);font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:300;font-style:italic;color:var(--ink);line-height:1.55;margin-bottom:28px;padding-left:24px;border-left:3px solid var(--a)}
+.promise-box{background:var(--axl);border:1px solid var(--al);padding:32px;margin-top:32px}
+.promise-box .stag{margin-bottom:14px}
+.promise-box ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.promise-box ul li{font-size:13px;color:var(--muted);padding-left:20px;position:relative;font-weight:300}
+.promise-box ul li::before{content:'→';position:absolute;left:0;color:var(--a);font-size:11px}
+.ci-items{display:flex;flex-direction:column;gap:0}
+.ci-item{padding:22px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start}
+.ci-item:last-child{border-bottom:none}
+.ci-num{font-family:var(--display);font-size:1.4rem;font-style:italic;color:rgba(125,32,39,0.4);line-height:1;padding-top:4px}
+.ci-body h3{font-family:var(--serif);font-size:.95rem;font-weight:400;color:var(--ink);margin-bottom:5px}
+.ci-body p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.7}
+
+/* FINAL CTA */
+.final-cta{padding:128px 0;text-align:center;background:var(--white);border-top:1px solid var(--border);position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:var(--axl);border-radius:50%;opacity:.6}
+.final-cta h2{font-family:var(--serif);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:18px;position:relative}
+.final-cta h2 em{font-style:italic;color:var(--a)}
+.final-cta .sub{font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 52px;line-height:1.85;position:relative}
+.final-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:72px;position:relative}
+.contact-bar{display:flex;gap:0;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 0}
+.cbar-item{padding:0 48px;text-align:center;border-right:1px solid var(--border)}
+.cbar-item:last-child{border-right:none}
+.cbar-item .cl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:6px}
+.cbar-item .cv{font-size:14px;color:var(--ink2);font-weight:300}
+.cbar-item a{color:var(--ink2);text-decoration:none;transition:color .2s}
+.cbar-item a:hover{color:var(--a)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:48px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:var(--serif);font-size:1rem;color:#fff}
+.footer-brand em{font-style:italic;color:var(--al)}
+.footer-sub{font-size:10px;color:#A8A8A2;margin-top:5px;letter-spacing:.05em}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A8A8A2;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--al)}
+.footer-copy{font-size:10px;color:#8A8A84;letter-spacing:.05em}
+
+/* PROP IMAGE BACKGROUNDS */
+.bg-ocean{background:linear-gradient(145deg,#F0D8DA 0%,#DEB8BC 40%,#E8C8CA 100%)}
+.bg-sand{background:linear-gradient(145deg,#F4E8E0 0%,#E0C8BC 40%,#EAD8D0 100%)}
+.bg-jungle{background:linear-gradient(145deg,#EDD8D0 0%,#D4A8B0 40%,#E2C0C4 100%)}
+.prop-icon{color:rgba(55,87,34,0.25);font-size:64px;line-height:1}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .modal-hero{grid-template-columns:1fr}
+  .claris-wrap{grid-template-columns:1fr}
+  .watamu-grid{grid-template-columns:1fr}
+  .modal-sections{grid-template-columns:1fr}
+  #modal{inset:0}
+  .modal-inner{padding:64px 24px 40px}
+}
+@media(max-width:700px){
+  #nav{padding:0 20px}.nav-links{display:none}.wrap{padding:0 24px}
+  .sec{padding:80px 0}.hero-inner{padding:120px 24px 60px}
+  .hstat{padding:0 18px}.final-cta{padding:80px 0}
+  footer{padding:32px 24px;flex-direction:column;align-items:flex-start;gap:24px}
+  .contact-bar{flex-direction:column;gap:0}
+  .cbar-item{border-right:none;border-bottom:1px solid var(--border);padding:24px 0;width:100%}
+  .cbar-item:last-child{border-bottom:none}
+  #cur,#cur2{display:none}
+  body{cursor:auto}
+  button,a{cursor:pointer}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Claris <span>African Experience</span></a>
+  <ul class="nav-links">
+    <li><a href="#invest">Security</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#watamu">Watamu</a></li>
+    <li><a href="#listings">Properties</a></li>
+    <li><a href="#why-claris">Why Claris</a></li>
+  </ul>
+  <a href="#contact"><button class="nav-cta">Book a Consultation</button></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="background: url('assets/hero_background.png') center/cover no-repeat; position: relative;">
+  <div style="position:absolute;inset:0;background:rgba(255,255,255,0.92);z-index:0;"></div>
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-accent-bl"></div>
+  <div class="hero-accent-tr"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-line"></span>
+      <span>Claris African Experience — For Sale</span>
+      <span class="badge-line"></span>
+    </div>
+    <h1 class="hero-h1">Where <em>Africa's Beauty</em> Becomes Your Investment</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Verified land, villas, and development opportunities on the Kenyan coast — sourced, secured, developed, and managed by Claris from the first conversation to the first booking.</p>
+    <div class="hero-ctas">
+      <a href="#listings"><button class="btn-primary">Explore Properties</button></a>
+      <a href="#contact"><button class="btn-secondary">Speak to an Advisor</button></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="n">35+</span><span class="l">Properties Managed</span></div>
+      <div class="hstat"><span class="n">5★</span><span class="l">Google Rating</span></div>
+      <div class="hstat"><span class="n">10+</span><span class="l">Years on the Coast</span></div>
+      <div class="hstat"><span class="n">100%</span><span class="l">Verified Listings</span></div>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <span>Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TRUST PILLARS -->
+<section id="invest" class="sec sec-off">
+  <div class="wrap">
+    <span class="stag reveal">Security & Verification</span>
+    <h2 class="sec-title reveal delay-1">Every Investment,<br><em>Thoroughly Protected</em></h2>
+    <p class="sec-lead reveal delay-2">We apply the same precision to investment properties as we do to our managed hospitality portfolio. No offer proceeds without absolute documentation clarity.</p>
+    <div class="pillars-grid">
+      <div class="pillar reveal delay-1">
+        <span class="pillar-num">01</span>
+        <span class="pillar-bar"></span>
+        <h3>Title Verification</h3>
+        <p>Master title searches, complete ownership history checks, and encumbrance reviews are done before any offer is made on your behalf.</p>
+      </div>
+      <div class="pillar reveal delay-2">
+        <span class="pillar-num">02</span>
+        <span class="pillar-bar"></span>
+        <h3>Legal Transparency</h3>
+        <p>Full coordination with qualified Kenyan lawyers. Every step is explained in plain language and managed from start to title transfer.</p>
+      </div>
+      <div class="pillar reveal delay-3">
+        <span class="pillar-num">03</span>
+        <span class="pillar-bar"></span>
+        <h3>Due Diligence</h3>
+        <p>Professional assessments covering planning permissions, land-use zoning, development potential, and environmental considerations — before commitment.</p>
+      </div>
+      <div class="pillar reveal delay-4">
+        <span class="pillar-num">04</span>
+        <span class="pillar-bar"></span>
+        <h3>Full Documentation</h3>
+        <p>Every listing in our portfolio is presented with complete, verified paperwork. Nothing is withheld. Transparency is the foundation of every transaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="sec">
+  <div class="wrap">
+    <span class="stag reveal">Your Journey With Claris</span>
+    <h2 class="sec-title reveal delay-1">From First Conversation<br><em>To First Booking</em></h2>
+    <p class="sec-lead reveal delay-2">Claris is not a listing platform. We are your complete operational partner — present at every stage of the investment lifecycle.</p>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-num">01</div><div class="tl-content"><h3>Property Sourcing & Strategy</h3><p>We begin with your goals, timeline, and parameters. Using deep local knowledge and an exclusive network, we identify land, villas, and development sites aligned precisely with your vision — including off-market opportunities.</p><div class="tl-tags"><span class="tl-tag">Land</span><span class="tl-tag">Villas</span><span class="tl-tag">Development Sites</span><span class="tl-tag">Off-Market</span></div></div></div>
+      <div class="tl-item reveal delay-1"><div class="tl-num">02</div><div class="tl-content"><h3>Verification, Negotiation & Legal</h3><p>We conduct all due diligence, negotiate best terms on your behalf, and coordinate with qualified lawyers to manage every administrative and legal procedure through to title transfer.</p><div class="tl-tags"><span class="tl-tag">Due Diligence</span><span class="tl-tag">Legal Coordination</span><span class="tl-tag">Title Transfer</span></div></div></div>
+      <div class="tl-item reveal delay-2"><div class="tl-num">03</div><div class="tl-content"><h3>Development & Construction</h3><p>For land or development projects, Claris oversees the entire build — from architectural planning and permits through construction management, delivered to premium international hospitality standard.</p><div class="tl-tags"><span class="tl-tag">Architecture</span><span class="tl-tag">Permits</span><span class="tl-tag">Construction</span></div></div></div>
+      <div class="tl-item reveal delay-3"><div class="tl-num">04</div><div class="tl-content"><h3>Furnishing, Setup & Staffing</h3><p>Interior design, furniture procurement, and complete operational setup. We recruit, train, and manage household staff to our established premium hospitality standard — guest-ready from day one.</p><div class="tl-tags"><span class="tl-tag">Interior Design</span><span class="tl-tag">Furnishing</span><span class="tl-tag">Staff Management</span></div></div></div>
+      <div class="tl-item reveal delay-4"><div class="tl-num">05</div><div class="tl-content"><h3>Rental Management & Income</h3><p>Your investment begins generating returns. We manage all bookings, international marketing, guest relations, maintenance, and financial reporting — transforming your property into a high-yield professionally managed asset.</p><div class="tl-tags"><span class="tl-tag">Bookings</span><span class="tl-tag">International Marketing</span><span class="tl-tag">Income Reporting</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-sec">
+  <div class="quote-bg">"</div>
+  <div class="quote-inner">
+    <div class="q-rule reveal"><span></span><div class="q-diamond"></div><span></span></div>
+    <blockquote class="reveal delay-1">"Watamu is not simply a destination. It is a rare convergence of natural wonder, growing international demand, and still-accessible investment. Those who recognise this moment will look back on it as their defining opportunity."</blockquote>
+    <div class="q-rule reveal delay-2"><span></span><div class="q-diamond"></div><span></span></div>
+    <cite class="reveal delay-3">Claris African Experience — Founder's Vision</cite>
+  </div>
+</div>
+
+<!-- WHY WATAMU -->
+<section id="watamu" class="sec">
+  <div class="wrap">
+    <span class="stag reveal">Why Watamu</span>
+    <h2 class="sec-title reveal delay-1">A Coastline on the<br><em>Verge of Everything</em></h2>
+    <p class="sec-lead reveal delay-2">Watamu sits at the intersection of natural wonder, international recognition, and still-accessible investment value. The window exists — but will not remain open indefinitely.</p>
+    <div class="watamu-grid">
+      <div class="witem reveal"><span class="witem-num">01</span><h3>Growing International Appeal</h3><p>Watamu has moved decisively into the international travel conversation. European, American, and Gulf visitors arrive in increasing numbers, creating sustained demand for quality accommodation and driving investment fundamentals.</p></div>
+      <div class="witem reveal delay-1"><span class="witem-num">02</span><h3>Irreplaceable Natural Beauty</h3><p>White sand beaches, a UNESCO-protected marine national park, lush coastal forests, and a lifestyle defined by nature and warmth. An environment that cannot be manufactured — and therefore never loses its intrinsic value.</p></div>
+      <div class="witem reveal delay-2"><span class="witem-num">03</span><h3>Sustained Tourism Growth</h3><p>Kenya's coastal tourism sector continues to expand. Well-managed Watamu villas maintain strong occupancy year-round, with peak seasons fully booked months in advance by international guests seeking authentic luxury.</p></div>
+      <div class="witem reveal delay-3"><span class="witem-num">04</span><h3>Rising Real Estate Demand</h3><p>Property values along the Watamu coast have appreciated consistently. Infrastructure investment, improved connectivity, and growing international interest are accelerating this trajectory. The fundamentals are firmly in place.</p></div>
+      <div class="witem reveal"><span class="witem-num">05</span><h3>Exceptional Investment Value</h3><p>Compared to Tuscany, Mykonos, Bali, or the Caribbean, Watamu offers extraordinary value per square metre — with equivalent or superior lifestyle quality, rental potential, and long-term appreciation. This entry point will not exist in a decade.</p></div>
+      <div class="witem reveal delay-1"><span class="witem-num">06</span><h3>The Perfect Balance</h3><p>Luxury, nature, and development potential in precise equilibrium. Watamu provides the authentic African coastal experience that discerning global travellers increasingly seek — and Claris knows exactly how to position your property within that market.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section id="listings" class="sec sec-off">
+  <div class="wrap">
+    <span class="stag reveal">Current Investment Proposals</span>
+    <h2 class="sec-title reveal delay-1">Select<br><em>Opportunities</em></h2>
+    <p class="sec-lead reveal delay-2">Each property is presented independently with complete transparency and investment context. Full documentation packages and private viewings are available on request.</p>
+    <div class="prop-filter reveal delay-3">
+      <button class="pf-btn active" onclick="filterProps('all',this)">All</button>
+      <button class="pf-btn" onclick="filterProps('land',this)">Land</button>
+      <button class="pf-btn" onclick="filterProps('villa',this)">Villas</button>
+      <button class="pf-btn" onclick="filterProps('development',this)">Development</button>
+    </div>
+    <div class="props-grid" id="props-grid">
+
+      <div class="prop-card reveal" data-type="villa" onclick="openModal('villa1')">
+        <div class="prop-img">
+          <div class="prop-img-inner bg-ocean"><img src="assets/villa_azzurra.png" alt="Ocean Villa Azzurra" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="prop-overlay"><span class="prop-overlay-btn">View Full Details</span></div>
+          <div class="prop-badge-wrap"><span class="prop-badge pb-type">Villa</span><span class="prop-badge pb-status">Turnkey</span></div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-loc">&#128205; Watamu Beach Road</div>
+          <h3>Ocean Villa Azzurra</h3>
+          <p>A fully furnished beachfront villa with direct ocean access, private pool, and an established rental history under active Claris management. Immediate income from day one.</p>
+          <div class="prop-specs">
+            <div class="pspec"><span class="sv">4</span><span class="sk">Bedrooms</span></div>
+            <div class="pspec"><span class="sv">320 m²</span><span class="sk">Built Area</span></div>
+            <div class="pspec"><span class="sv">Direct</span><span class="sk">Ocean Access</span></div>
+            <div class="pspec"><span class="sv">Clear</span><span class="sk">Title</span></div>
+          </div>
+          <div class="prop-actions">
+            <button class="prop-cta-main">Full Details</button>
+            <button class="prop-cta-sec" onclick="event.stopPropagation();window.location.href='mailto:clarisafricanexperience@gmail.com?subject=Enquiry: Ocean Villa Azzurra'">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="prop-card reveal delay-1" data-type="land" onclick="openModal('land1')">
+        <div class="prop-img">
+          <div class="prop-img-inner bg-sand"><img src="assets/turtle_bay_plot.png" alt="Turtle Bay Ocean Plot" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="prop-overlay"><span class="prop-overlay-btn">View Full Details</span></div>
+          <div class="prop-badge-wrap"><span class="prop-badge pb-type">Land</span><span class="prop-badge pb-status">Beachfront</span></div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-loc">&#128205; Turtle Bay, Watamu</div>
+          <h3>Turtle Bay Ocean Plot</h3>
+          <p>A rare beachfront parcel with unobstructed Indian Ocean views and verified title deed. Architectural concepts available. Ideal for boutique villa or small resort development.</p>
+          <div class="prop-specs">
+            <div class="pspec"><span class="sv">1,200 m²</span><span class="sk">Plot Area</span></div>
+            <div class="pspec"><span class="sv">28m</span><span class="sk">Ocean Frontage</span></div>
+            <div class="pspec"><span class="sv">Residential</span><span class="sk">Zoning</span></div>
+            <div class="pspec"><span class="sv">Verified</span><span class="sk">Title</span></div>
+          </div>
+          <div class="prop-actions">
+            <button class="prop-cta-main">Full Details</button>
+            <button class="prop-cta-sec" onclick="event.stopPropagation();window.location.href='mailto:clarisafricanexperience@gmail.com?subject=Enquiry: Turtle Bay Ocean Plot'">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="prop-card reveal delay-2" data-type="development" onclick="openModal('dev1')">
+        <div class="prop-img">
+          <div class="prop-img-inner bg-jungle"><img src="assets/garoda_resort.png" alt="Garoda Resort Land" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="prop-overlay"><span class="prop-overlay-btn">View Full Details</span></div>
+          <div class="prop-badge-wrap"><span class="prop-badge pb-type">Development</span><span class="prop-badge pb-status">Resort Potential</span></div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-loc">&#128205; Garoda Area, Watamu</div>
+          <h3>Garoda Resort Land</h3>
+          <p>A substantial coastal land parcel with boutique resort development potential. Claris can support the entire build-to-operate cycle from architectural design through opening day.</p>
+          <div class="prop-specs">
+            <div class="pspec"><span class="sv">4,800 m²</span><span class="sk">Land Area</span></div>
+            <div class="pspec"><span class="sv">Resort</span><span class="sk">Zoning</span></div>
+            <div class="pspec"><span class="sv">Renders</span><span class="sk">Available</span></div>
+            <div class="pspec"><span class="sv">Full</span><span class="sk">Claris Support</span></div>
+          </div>
+          <div class="prop-actions">
+            <button class="prop-cta-main">Full Details</button>
+            <button class="prop-cta-sec" onclick="event.stopPropagation();window.location.href='mailto:clarisafricanexperience@gmail.com?subject=Enquiry: Garoda Resort Land'">Enquire</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="margin-top:44px;text-align:center" class="reveal">
+      <p style="font-size:13px;color:var(--muted);max-width:540px;margin:0 auto 22px;font-weight:300">Additional listings are held exclusively and not published publicly. Contact Claris to receive the full confidential investment portfolio, including off-market opportunities.</p>
+      <a href="mailto:clarisafricanexperience@gmail.com?subject=Request: Full Confidential Portfolio"><button class="btn-secondary">Request Confidential Portfolio</button></a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CLARIS -->
+<section id="why-claris" class="sec sec-green">
+  <div class="wrap">
+    <span class="stag reveal">Why Claris African Experience</span>
+    <h2 class="sec-title reveal delay-1">Your Partner<br><em>On the Ground</em></h2>
+    <div class="claris-wrap">
+      <div class="claris-left reveal delay-2">
+        <div class="big-q">"In a market where knowledge, connections, and trust are everything — Claris brings all three, built through years of operational presence in Watamu."</div>
+        <p style="font-size:14px;color:var(--muted);line-height:1.9">We are not brokers. We are operators — with offices in Watamu, a managed portfolio of 35+ properties, and a 5-star reputation built through exceptional guest and owner relationships. When you invest through Claris, you gain a complete dedicated team.</p>
+        <div class="promise-box">
+          <span class="stag">Our Promise to Every Investor</span>
+          <ul>
+            <li>Complete transparency at every stage</li>
+            <li>Regular reporting and income statements</li>
+            <li>Your investment, never subcontracted</li>
+            <li>Premium positioning for maximum returns</li>
+            <li>Long-term relationship, not a one-off transaction</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ci-items reveal delay-3">
+        <div class="ci-item"><div class="ci-num">1</div><div class="ci-body"><h3>Deep Local Presence</h3><p>Physical offices in Watamu, a trusted local network built over a decade, and market knowledge no remote advisor can replicate.</p></div></div>
+        <div class="ci-item"><div class="ci-num">2</div><div class="ci-body"><h3>Direct Operational Control</h3><p>We manage maintenance, bookings, staff, and marketing ourselves. Your investment is never passed to a third party.</p></div></div>
+        <div class="ci-item"><div class="ci-num">3</div><div class="ci-body"><h3>Multilingual International Team</h3><p>English, Italian, Swahili, and French. We serve international investors with the communication sophistication they deserve.</p></div></div>
+        <div class="ci-item"><div class="ci-num">4</div><div class="ci-body"><h3>Premium Brand Positioning</h3><p>Your property inherits the Claris brand — 5 stars on Google, an established international guest base, and premium global marketing.</p></div></div>
+        <div class="ci-item"><div class="ci-num">5</div><div class="ci-body"><h3>Investment Transformed Into Income</h3><p>We build a professionally managed, income-generating asset — and stand behind it for the long term.</p></div></div>
+        <div class="ci-item"><div class="ci-num">6</div><div class="ci-body"><h3>Long-Term Vision</h3><p>We think in decades, not transactions. Our relationship with your investment deepens over time through maintenance, upgrades, and evolving marketing.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="contact" class="final-cta">
+  <div class="wrap">
+    <span class="stag reveal" style="display:block;text-align:center">Begin Your Journey</span>
+    <h2 class="reveal delay-1">Your African Investment<br><em>Starts Here</em></h2>
+    <p class="sub reveal delay-2">Whether you are acquiring land, purchasing a villa, or developing a resort — Claris is ready to guide you from the first conversation to the first booking.</p>
+    <div class="final-btns reveal delay-3">
+      <a href="mailto:clarisafricanexperience@gmail.com?subject=Investment Enquiry — Claris For Sale"><button class="btn-primary">Start an Enquiry</button></a>
+      <a href="https://wa.me/254792241787" target="_blank"><button class="btn-secondary">WhatsApp Us Directly</button></a>
+    </div>
+    <div class="contact-bar reveal delay-4">
+      <div class="cbar-item"><span class="cl">Call</span><span class="cv">+254 792 241 787</span></div>
+      <div class="cbar-item"><span class="cl">Email</span><span class="cv"><a href="mailto:clarisafricanexperience@gmail.com">clarisafricanexperience@gmail.com</a></span></div>
+      <div class="cbar-item"><span class="cl">WhatsApp</span><span class="cv"><a href="https://wa.me/254792241787">+254 792 241 787</a></span></div>
+      <div class="cbar-item"><span class="cl">Office</span><span class="cv">Luma Plaza, Watamu, Kenya</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Claris <em>African Experience</em></div>
+    <div class="footer-sub">Watamu · Kilifi · Diani · Kenya</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://www.clarisafricanexperience.com" target="_blank">Main Website</a>
+    <a href="mailto:clarisafricanexperience@gmail.com">Contact</a>
+    <a href="#">Privacy</a>
+  </div>
+  <div class="footer-copy">&copy; 2025 Claris African Experience. All rights reserved.</div>
+</footer>
+
+<!-- MODAL OVERLAY -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div id="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕ Close</button>
+    <div class="modal-inner" id="modal-content"></div>
+  </div>
+</div>
+
+<!-- MODAL TEMPLATES -->
+<template id="tpl-villa1">
+<div class="modal-hero">
+  <div class="modal-gallery">
+    <div class="mgal-main mgal-img bg-ocean" style="height:280px;padding:0;overflow:hidden;"><img src="assets/villa_azzurra.png" alt="Ocean Villa Azzurra" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="mgal-img bg-ocean" style="height:140px;padding:0;overflow:hidden;"><img src="assets/villa_azzurra_thumb1.png" alt="Villa Azzurra Exterior" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="mgal-img bg-ocean" style="height:140px;padding:0;overflow:hidden;"><img src="assets/villa_azzurra_thumb2.png" alt="Villa Azzurra Pool" style="width:100%;height:100%;object-fit:cover;"></div>
+  </div>
+  <div class="modal-info">
+    <span class="stag">Turnkey Beachfront Villa</span>
+    <h2>Ocean Villa Azzurra</h2>
+    <span class="mloc">&#128205; Watamu Beach Road, Watamu, Kenya</span>
+    <p class="mdesc">A fully furnished beachfront villa with direct ocean access and private pool. Villa Azzurra has been under active Claris management for several seasons with consistent high-season occupancy. Documentation is complete, staff are in place, and the rental infrastructure is active. For an investor seeking immediate income from day one, this is a rare and ready opportunity.</p>
+    <div class="modal-specs-grid">
+      <div class="mspec"><span class="msk">Property Type</span><span class="msv">Beachfront Villa</span></div>
+      <div class="mspec"><span class="msk">Bedrooms</span><span class="msv">4 en-suite</span></div>
+      <div class="mspec"><span class="msk">Built Area</span><span class="msv">320 m²</span></div>
+      <div class="mspec"><span class="msk">Plot Area</span><span class="msv">680 m²</span></div>
+      <div class="mspec"><span class="msk">Title Status</span><span class="msv">Clear — Verified</span></div>
+      <div class="mspec"><span class="msk">Documentation</span><span class="msv">Complete</span></div>
+    </div>
+    <div class="modal-ctas">
+      <a href="mailto:clarisafricanexperience@gmail.com?subject=Documentation Request: Ocean Villa Azzurra"><button class="btn-primary">Request Documentation</button></a>
+      <a href="https://wa.me/254792241787?text=Hello Claris, I am interested in Ocean Villa Azzurra." target="_blank"><button class="btn-secondary">WhatsApp</button></a>
+    </div>
+  </div>
+</div>
+<div class="modal-sections">
+  <div class="msec"><h4>Technical Features</h4><ul><li>4 bedrooms, all en-suite with sea or garden views</li><li>Private infinity pool overlooking the Indian Ocean</li><li>Fully equipped kitchen and outdoor dining terrace</li><li>Solar power system and backup generator</li><li>Staff quarters for live-in housekeeping</li><li>24/7 security system with perimeter access control</li><li>High-speed satellite internet throughout</li></ul></div>
+  <div class="msec"><h4>Investment & Rental Potential</h4><ul><li>Established rental history under Claris management</li><li>High season bookings secured months in advance</li><li>Marketed internationally through Claris premium channels</li><li>Professional photography and premium online listing</li><li>All guest communication handled by Claris</li><li>Monthly income statements provided to owner</li><li>Strong appreciation — beachfront scarcity value</li></ul></div>
+  <div class="msec"><h4>Documentation Status</h4><ul><li>Master title — verified and clear</li><li>No encumbrances or disputes on record</li><li>Full ownership history available</li><li>Land registry confirmation on request</li><li>Complete legal package prepared</li></ul></div>
+  <div class="msec"><h4>Location</h4><ul><li>Direct beachfront — Watamu Beach Road</li><li>Walking distance to Watamu village</li><li>5 minutes from Watamu Marine National Park</li><li>45 minutes from Malindi Airport</li><li>2.5 hours from Nairobi by road or short flight</li></ul></div>
+</div>
+<div class="modal-contact">
+  <h4>Request the Full Investment Package</h4>
+  <p>Complete documentation, rental income history, professional photos, and a private viewing can be arranged. Contact the Claris investment team directly.</p>
+  <div class="cbtns">
+    <a href="mailto:clarisafricanexperience@gmail.com?subject=Full Package: Ocean Villa Azzurra"><button class="btn-primary">Email Investment Team</button></a>
+    <a href="https://wa.me/254792241787" target="_blank"><button class="btn-secondary">+254 792 241 787</button></a>
+  </div>
+</div>
+</template>
+
+<template id="tpl-land1">
+<div class="modal-hero">
+  <div class="modal-gallery">
+    <div class="mgal-main mgal-img bg-sand" style="height:280px;padding:0;overflow:hidden;"><img src="assets/turtle_bay_plot.png" alt="Turtle Bay Ocean Plot" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="mgal-img bg-sand" style="height:140px;padding:0;overflow:hidden;"><img src="assets/turtle_bay_plot.png" alt="Turtle Bay Plot 1" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="mgal-img bg-sand" style="height:140px;padding:0;overflow:hidden;"><img src="assets/turtle_bay_plot.png" alt="Turtle Bay Plot 2" style="width:100%;height:100%;object-fit:cover;"></div>
+  </div>
+  <div class="modal-info">
+    <span class="stag">Beachfront Land</span>
+    <h2>Turtle Bay Ocean Plot</h2>
+    <span class="mloc">&#128205; Turtle Bay Road, Watamu, Kenya</span>
+    <p class="mdesc">A rare beachfront parcel along Turtle Bay Road, with unobstructed Indian Ocean views and 28 metres of direct beach access. Among the last available beachfront plots in the Watamu area. Title is verified and documentation is complete. Architectural concept renders are available. Claris can accompany the full development journey from planning through construction and into managed rental operation.</p>
+    <div class="modal-specs-grid">
+      <div class="mspec"><span class="msk">Property Type</span><span class="msv">Beachfront Land</span></div>
+      <div class="mspec"><span class="msk">Plot Area</span><span class="msv">1,200 m²</span></div>
+      <div class="mspec"><span class="msk">Ocean Frontage</span><span class="msv">Direct — 28 metres</span></div>
+      <div class="mspec"><span class="msk">Zoning</span><span class="msv">Residential / Tourism</span></div>
+      <div class="mspec"><span class="msk">Title Status</span><span class="msv">Verified — Clear</span></div>
+      <div class="mspec"><span class="msk">Renders</span><span class="msv">Available on Request</span></div>
+    </div>
+    <div class="modal-ctas">
+      <a href="mailto:clarisafricanexperience@gmail.com?subject=Documentation Request: Turtle Bay Ocean Plot"><button class="btn-primary">Request Documentation</button></a>
+      <a href="https://wa.me/254792241787?text=Hello Claris, I am interested in the Turtle Bay Ocean Plot." target="_blank"><button class="btn-secondary">WhatsApp</button></a>
+    </div>
+  </div>
+</div>
+<div class="modal-sections">
+  <div class="msec"><h4>Development Potential</h4><ul><li>Area sufficient for a 3–5 bedroom luxury villa with pool</li><li>Concept renders available — bespoke design possible</li><li>Claris can manage full build-to-operate cycle</li><li>Projected rental income modelling on request</li><li>Planning consultation and permit support provided</li><li>Potential for boutique guesthouse (2–4 keys)</li></ul></div>
+  <div class="msec"><h4>Location Details</h4><ul><li>Turtle Bay Road — premium coastal address in Watamu</li><li>28 metres direct ocean frontage</li><li>Adjacent to protected marine conservation area</li><li>Walking distance to Watamu town centre</li><li>40 minutes from Malindi International Airport</li><li>Luxury villa neighbourhood — established area</li></ul></div>
+  <div class="msec"><h4>Documentation Status</h4><ul><li>Title deed — verified and clear</li><li>No encumbrances, caveats or disputes</li><li>Survey maps and boundary documents complete</li><li>Environmental assessment available</li><li>Full legal package prepared for transaction</li></ul></div>
+  <div class="msec"><h4>Claris Support Available</h4><ul><li>Architectural design coordination</li><li>Planning and permit management</li><li>Construction supervision and quality control</li><li>Interior design and furnishing procurement</li><li>Staff recruitment and training</li><li>Rental management and international marketing</li></ul></div>
+</div>
+<div class="modal-contact">
+  <h4>Arrange a Private Site Visit</h4>
+  <p>The Claris team can arrange a private viewing and present full documentation, concept renders, and projected investment returns. Contact us to schedule.</p>
+  <div class="cbtns">
+    <a href="mailto:clarisafricanexperience@gmail.com?subject=Site Visit Request: Turtle Bay Ocean Plot"><button class="btn-primary">Request Site Visit</button></a>
+    <a href="https://wa.me/254792241787" target="_blank"><button class="btn-secondary">+254 792 241 787</button></a>
+  </div>
+</div>
+</template>
+
+<template id="tpl-dev1">
+<div class="modal-hero">
+  <div class="modal-gallery">
+    <div class="mgal-main mgal-img bg-jungle" style="height:280px;padding:0;overflow:hidden;"><img src="assets/garoda_resort.png" alt="Garoda Resort Land" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="mgal-img bg-jungle" style="height:140px;padding:0;overflow:hidden;"><img src="assets/garoda_resort.png" alt="Garoda Resort 1" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="mgal-img bg-jungle" style="height:140px;padding:0;overflow:hidden;"><img src="assets/garoda_resort.png" alt="Garoda Resort 2" style="width:100%;height:100%;object-fit:cover;"></div>
+  </div>
+  <div class="modal-info">
+    <span class="stag">Resort Development</span>
+    <h2>Garoda Resort Land</h2>
+    <span class="mloc">&#128205; Garoda Area, Watamu, Kenya</span>
+    <p class="mdesc">A substantial coastal land parcel in Watamu's sought-after Garoda area with confirmed resort and boutique hotel development potential. Claris can support the entire lifecycle: architectural vision, planning approvals, construction supervision, staffing, and full managed operation. Development renders and feasibility projections are available to serious investors upon request.</p>
+    <div class="modal-specs-grid">
+      <div class="mspec"><span class="msk">Property Type</span><span class="msv">Development Land</span></div>
+      <div class="mspec"><span class="msk">Total Area</span><span class="msv">4,800 m²</span></div>
+      <div class="mspec"><span class="msk">Zoning</span><span class="msv">Resort / Tourism</span></div>
+      <div class="mspec"><span class="msk">Development Capacity</span><span class="msv">8–12 Keys</span></div>
+      <div class="mspec"><span class="msk">Title Status</span><span class="msv">Verified — Clear</span></div>
+      <div class="mspec"><span class="msk">Renders Available</span><span class="msv">Yes — on Request</span></div>
+    </div>
+    <div class="modal-ctas">
+      <a href="mailto:clarisafricanexperience@gmail.com?subject=Investment Brief Request: Garoda Resort Land"><button class="btn-primary">Request Investment Brief</button></a>
+      <a href="https://wa.me/254792241787?text=Hello Claris, I am interested in the Garoda Resort Land development." target="_blank"><button class="btn-secondary">WhatsApp</button></a>
+    </div>
+  </div>
+</div>
+<div class="modal-sections">
+  <div class="msec"><h4>Development Concept</h4><ul><li>Boutique resort with 8–12 luxury keys</li><li>Targeted at the high-end international travel market</li><li>Infinity pool, wellness facilities, restaurant concept</li><li>Full architectural renders available to qualified investors</li><li>Projected ROI analysis available on request</li><li>Positioned within the Claris managed hospitality network</li></ul></div>
+  <div class="msec"><h4>Claris Full-Cycle Support</h4><ul><li>Architectural design and concept development</li><li>Planning permission and environmental approvals</li><li>Construction management and quality oversight</li><li>Interior design, furnishing, and brand setup</li><li>Pre-opening staffing and operational training</li><li>Launch marketing and international distribution</li><li>Ongoing managed operation and financial reporting</li></ul></div>
+  <div class="msec"><h4>Documentation Status</h4><ul><li>Title deed — verified and clear</li><li>Resort/tourism zoning confirmed</li><li>Environmental study completed</li><li>No disputes or encumbrances on record</li><li>Full legal and technical package available</li></ul></div>
+  <div class="msec"><h4>Location</h4><ul><li>Garoda Road, Watamu — premium inland/coastal corridor</li><li>800 metres from Garoda Beach</li><li>Proximity to marine park and sea turtle sanctuary</li><li>30 minutes from Malindi International Airport</li><li>Established luxury development neighbourhood</li></ul></div>
+</div>
+<div class="modal-contact">
+  <h4>Request the Full Development Brief</h4>
+  <p>Renders, feasibility projections, and a private site presentation are available to qualified investors. This opportunity is presented on a selective basis.</p>
+  <div class="cbtns">
+    <a href="mailto:clarisafricanexperience@gmail.com?subject=Development Brief: Garoda Resort Land"><button class="btn-primary">Request Full Brief</button></a>
+    <a href="https://wa.me/254792241787" target="_blank"><button class="btn-secondary">+254 792 241 787</button></a>
+  </div>
+</div>
+</template>
+
+<script>
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  setTimeout(()=>{cur2.style.left=e.clientX+'px';cur2.style.top=e.clientY+'px'},60);
+});
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function filterProps(type,btn){
+  document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prop-card').forEach(c=>{
+    c.style.display=(type==='all'||c.dataset.type===type)?'block':'none';
+  });
+}
+function openModal(id){
+  const tpl=document.getElementById('tpl-'+id);
+  if(!tpl)return;
+  document.getElementById('modal-content').innerHTML=tpl.innerHTML;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('modal').scrollTop=0;
+}
+function closeModalDirect(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModal(e){
+  if(e.target===document.getElementById('modal-overlay'))closeModalDirect();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModalDirect();});
+</script>
+</body>
+</html>
