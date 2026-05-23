@@ -1,0 +1,24 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# VS Code workspace settings
+.vscode/
+
+# Backup files
+*~
+*.swp
+*.swo
+
+# System files
+desktop.ini
+
+# Node dependencies (if any local tooling is added later)
+node_modules/
+
+# Log files
+*.log
+
+# Build outputs
+dist/
+build/
